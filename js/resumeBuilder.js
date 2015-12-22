@@ -13,17 +13,17 @@ var bio = {
         "location": "Quincy, MA"
     },
     "welcomeMessage": "Hello! Welocme to my resume page. Its a responsive web page which can be viewed in all form factors (Desktop, mobile, tablet)",
-    "skills": ["HTML", "CSS", "JavaScript", "JQuery", "Java/J2EE"],
-    "pictureUrl": "images/me.png",
+    "skills": ["HTML", "CSS", "JavaScript", "JQuery"],
+    "biopic": "images/me.png",
     display: function() {
 
         // Display Biographic information
 
         // Header section
-        $("#header").prepend(formatData(HTMLheaderName, bio.name) + formatData(HTMLheaderRole, bio.role));
-        //$("#header").append(formatData(HTMLheaderRole,bio.role));
+        $("#header").prepend(formatData(HTMLheaderName, bio.name));
+        $("#name").after(formatData(HTMLheaderRole, bio.role));
 
-        $("#header").append(formatData(HTMLbioPic, bio.pictureUrl));
+        $("#header").append(formatData(HTMLbioPic, bio.biopic));
         $("#header").append(formatData(HTMLwelcomeMsg, bio.welcomeMessage));
         $("#header").append(HTMLskillsStart);
         // Skills
@@ -38,9 +38,50 @@ var bio = {
 
     }
 };
-//Display Biography Section
-bio.display();
 
+// Eduction section data
+var education = {
+    "schools": [{
+        "name": "Osmania University",
+        "location": "Hyderabad , India",
+        "degree": "Bachelor of Engineering",
+        "majors": [
+            "Electronic & Communication"
+        ],
+        "dates": "1996",
+        "url": "http://www.osmania.ac.in/"
+    }],
+    "onlineCourses": [{
+        "title": "Front-End Web Developer Nanodegree",
+        "school": "Udacity",
+        "date": "2015",
+        "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+    }],
+    display: function() {
+        // Display education information
+
+        // Display education details
+        education.schools.forEach(function(school) {
+            $("#education").append(HTMLschoolStart);
+            $(".education-entry:last").append(formatData(HTMLschoolName, school.name));
+            $(".education-entry:last").append(formatData(HTMLschoolDegree, school.degree));
+            $(".education-entry:last").append(formatData(HTMLschoolDates, school.dates));
+            $(".education-entry:last").append(formatData(HTMLschoolLocation, school.location));
+            $(".education-entry:last").append(formatData(HTMLschoolMajor, school.majors));
+        });
+
+        // Display online courses
+        $("#education").append(HTMLonlineClasses);
+        education.onlineCourses.forEach(function(onlinecourse) {
+            $("#education").append(HTMLschoolStart);
+            $(".education-entry:last").append(formatData(HTMLonlineTitle, onlinecourse.title));
+            $(".education-entry:last").append(formatData(HTMLonlineSchool, onlinecourse.school));
+            $(".education-entry:last").append(formatData(HTMLonlineDates, onlinecourse.date));
+            $(".education-entry:last").append(formatData(HTMLonlineURL, onlinecourse.url));
+        });
+
+    }
+};
 
 //Work Experience section data
 var work = {
@@ -73,24 +114,18 @@ var work = {
     }
 };
 
-//Display Work experience Section
-work.display();
-
 //Projects section data
-
 var projects = {
 
     "projects": [{
-            "id": "trade",
-            "title": "Online Trading",
+            "title": "Trading",
             "dates": "2014-Future",
             "description": "Online Trading stocks , options , mutual funds. Migration of existing online trading pages to use the" +
                 "latest framework components and deployment standards. Involved in technical design and implemented" +
                 "several middle-tier components and business logic to support the business requirements.",
             "images": "images/trade.png"
         }, {
-            "id": "positions",
-            "title": "Portfolio Positions",
+            "title": "Positions",
             "dates": "2001-2014",
             "description": "Online customer Portfolio Account website which displays positions, balances information and real-time market values ," +
                 "totals gain loss for positions heald in the account",
@@ -102,8 +137,7 @@ var projects = {
 
         // Display Work information
         projects.projects.forEach(function(project) {
-            $("#projects").append(formatData(HTMLprojectStart, project.id));
-            //$("#projects").append(HTMLprojectStart);
+            $("#projects").append(formatData(HTMLprojectStart, project.title));
             $(".project-entry:last").append(formatData(HTMLprojectTitle, project.title));
             $(".project-entry:last").append(formatData(HTMLprojectDates, project.dates));
             $(".project-entry:last").append(formatData(HTMLprojectDescription, project.description));
@@ -112,60 +146,6 @@ var projects = {
 
     }
 };
-
-//Display Projects Section
-projects.display();
-
-// Eduction section data
-var education = {
-    "schools": [{
-        "name": "Osmania University",
-        "location": "Hyderabad , India",
-        "degree": "Bachelor of Engineering",
-        "majors": [
-            "Electronic & Communication"
-        ],
-        "dates": "1996",
-        "url": "http://www.osmania.ac.in/"
-    }],
-    "onlineCourses": [{
-        "title": "Front-End Web Developer Nanodegree",
-        "school": "Udacity",
-        "dates": "2015",
-        "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
-    }],
-    display: function() {
-        // Display education information
-
-        // Display education details
-        education.schools.forEach(function(school) {
-            $("#education").append(HTMLschoolStart);
-            $(".education-entry:last").append(formatData(HTMLschoolName, school.name));
-            $(".education-entry:last").append(formatData(HTMLschoolDegree, school.degree));
-            $(".education-entry:last").append(formatData(HTMLschoolDates, school.dates));
-            $(".education-entry:last").append(formatData(HTMLschoolLocation, school.location));
-            $(".education-entry:last").append(formatData(HTMLschoolMajor, school.majors));
-        });
-
-        // Display online courses
-        $("#education").append(HTMLonlineClasses);
-        education.onlineCourses.forEach(function(onlinecourse) {
-            $("#education").append(HTMLschoolStart);
-            $(".education-entry:last").append(formatData(HTMLonlineTitle, onlinecourse.title));
-            $(".education-entry:last").append(formatData(HTMLonlineSchool, onlinecourse.school));
-            $(".education-entry:last").append(formatData(HTMLonlineDates, onlinecourse.dates));
-            $(".education-entry:last").append(formatData(HTMLonlineURL, onlinecourse.url));
-        });
-
-    }
-};
-
-//Display Education Section
-education.display();
-
-//Display Map Section
-$("#mapDiv").append(googleMap);
-
 
 // Format methods
 function formatData(sourceStr, dataStr) {
@@ -179,3 +159,19 @@ function formatContacts(sourceId) {
     $(sourceId).append(formatData(HTMLtwitter, bio.contacts.twitter));
     $(sourceId).append(formatData(HTMLlocation, bio.contacts.location));
 }
+
+
+//Display Biography Section
+bio.display();
+
+//Display Work experience Section
+work.display();
+
+//Display Projects Section
+projects.display();
+
+//Display Education Section
+education.display();
+
+//Display Map Section
+$("#mapDiv").append(googleMap);
